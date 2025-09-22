@@ -1,14 +1,7 @@
 import pygame
-pygame.init()
+from game import Game
 
-#configuration de la fenetre de jeu
-pygame.display.set_mode((800,600))
-pygame.display.set_caption("pygame - adventure")
-
-#active le jeu - boucle
-running = True
-
-while running:
-    for event in pygame.event.get():
-        if event.type == pygame.QUIT:
-            running = False
+if __name__ == '__main__':
+    pygame.init()
+    game = Game()
+    game.run()
