@@ -29,16 +29,23 @@ class Game:
 
         if pressed[pygame.K_UP]:
             print("haut")
+            self.player.change_animation('up')
             self.player.move_up()
+
         elif pressed[pygame.K_DOWN]:
             print("bas")
             self.player.move_down()
+            self.player.change_animation('down')
+
         elif pressed[pygame.K_LEFT]:
             print("gauche")
             self.player.move_left()
+            self.player.change_animation('left')
+
         elif pressed[pygame.K_RIGHT]:
             print("droite")
             self.player.move_right()
+            self.player.change_animation('right')
 
 
 
