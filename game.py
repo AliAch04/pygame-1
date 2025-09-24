@@ -18,36 +18,57 @@ class Game:
 
         # generer un joueur
         player_position = tmx_data.get_object_by_name("player_spawn")
+        if player_position is None:
+            raise ValueError("No object named 'player_spawn' found in the TMX map.")
         self.player = Player(player_position.x, player_position.y)
 
         #dessiner les calques
         self.group = pyscroll.PyscrollGroup(map_layer=map_layer, default_layer=3)
         self.group.add(self.player)
+
+        #les collisions
+        self.walls = []
+
+        for col in tmx_data.objects:
+            if col.type == "collision":
+                rect = pygame.Rect(col.x, col.y, col.width, col.height)
+                self.walls.append(rect)
     
     def handle_input(self):
         pressed = pygame.key.get_pressed()
+        moved = False
+
+        if pressed[pygame.K_UP] or pressed[pygame.K_DOWN] or pressed[pygame.K_LEFT] or pressed[pygame.K_RIGHT]:
+            self.player.save_location()  
 
         if pressed[pygame.K_UP]:
-            print("haut")
             self.player.change_animation('up')
             self.player.move_up()
+            moved = True
 
-        elif pressed[pygame.K_DOWN]:
-            print("bas")
-            self.player.move_down()
+        if pressed[pygame.K_DOWN]:
             self.player.change_animation('down')
+            self.player.move_down()
+            moved = True
 
-        elif pressed[pygame.K_LEFT]:
-            print("gauche")
-            self.player.move_left()
+        if pressed[pygame.K_LEFT]:
             self.player.change_animation('left')
+            self.player.move_left()
+            moved = True
 
-        elif pressed[pygame.K_RIGHT]:
-            print("droite")
-            self.player.move_right()
+        if pressed[pygame.K_RIGHT]:
             self.player.change_animation('right')
+            self.player.move_right()
+            moved = True
 
+    def update(self):
+        self.group.update()
 
+        # verification de collision
+        for sprite in self.group.sprites():
+            if sprite.feet.collidelist(self.walls) > -1:
+                sprite.move_back()
+            
 
     def run(self):
 
@@ -59,7 +80,7 @@ class Game:
         while running:
 
             self.handle_input()
-            self.group.update()
+            self.update()
             self.group.center(self.player.rect.center)
             self.group.draw(self.screen)
             pygame.display.flip()

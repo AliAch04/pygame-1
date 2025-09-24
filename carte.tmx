@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="50" height="50" tilewidth="16" tileheight="16" infinite="0" nextlayerid="6" nextobjectid="2">
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="50" height="50" tilewidth="16" tileheight="16" infinite="0" nextlayerid="6" nextobjectid="18">
  <tileset firstgid="1" source="nature.tsx"/>
  <layer id="1" name="background" width="50" height="50">
   <data encoding="csv">
@@ -218,8 +218,21 @@
 </data>
  </layer>
  <objectgroup id="4" name="Objets">
-  <object id="1" name="player_spawn" x="190" y="246">
+  <object id="1" name="player_spawn" x="180" y="230">
    <point/>
   </object>
+  <object id="5" type="collision" x="0" y="0" width="800" height="31"/>
+  <object id="6" type="collision" x="0" y="29" width="31" height="737"/>
+  <object id="7" type="collision" x="767" y="31" width="32" height="741"/>
+  <object id="8" type="collision" x="-1" y="768" width="799" height="31"/>
+  <object id="9" type="collision" x="496" y="32.25" width="31.75" height="46.75"/>
+  <object id="10" type="collision" x="496.5" y="112.75" width="31" height="111.25"/>
+  <object id="11" type="collision" x="304" y="159.5" width="191.75" height="63.5"/>
+  <object id="12" type="collision" x="303.5" y="223" width="31.75" height="32.5"/>
+  <object id="13" type="collision" x="304" y="287.333" width="29.3333" height="255.333"/>
+  <object id="14" type="collision" x="333.333" y="512" width="192" height="30.6667"/>
+  <object id="15" type="collision" x="561.333" y="511.333" width="92.6667" height="31.3333"/>
+  <object id="16" type="collision" x="608.667" y="542" width="45.3333" height="113.333"/>
+  <object id="17" type="collision" x="608.667" y="672" width="46" height="95.3333"/>
  </objectgroup>
 </map>

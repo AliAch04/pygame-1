@@ -14,6 +14,8 @@ class Player(pygame.sprite.Sprite):
             'right': self.get_image(0, 64),
             'up': self.get_image(0, 96),
         }
+        self.feet = pygame.Rect(0, 0, self.rect.width * 0.5, 12)
+        self.old_position = self.position.copy()
         self.speed_walk = 1.25
 
     def change_animation(self, name): 
@@ -27,9 +29,18 @@ class Player(pygame.sprite.Sprite):
     def move_up(self): self.position[1] += -self.speed_walk
 
     def move_down(self): self.position[1] += self.speed_walk
+
+    def save_location(self):
+        self.old_position = self.position.copy()
     
     def update(self):
         self.rect.topleft = self.position
+        self.feet.midbottom = self.rect.midbottom
+
+    def move_back(self):
+        self.position = self.old_position
+        self.rect.topleft = self.position
+        self.feet.midbottom = self.rect.midbottom
     
     def get_image(self, x, y):
         #decoper l'image en questionne
